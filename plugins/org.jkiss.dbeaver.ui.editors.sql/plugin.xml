@@ -2,7 +2,6 @@
 <?eclipse version="3.2"?>
 
 <plugin>
-
     <extension-point id="org.jkiss.dbeaver.sql.covert" name="%extension-point.org.jkiss.dbeaver.sql.covertname" schema="schema/org.jkiss.dbeaver.sql.convert.exsd"/>
     <extension-point id="org.jkiss.dbeaver.sql.executors" name="%org.jkiss.dbeaver.sql.executors.name" schema="schema/org.jkiss.dbeaver.sql.executors.exsd"/>
     <extension-point id="org.jkiss.dbeaver.sqlPresentation" name="%extension-point.org.jkiss.dbeaver.sqlPresentation.name" schema="schema/org.jkiss.dbeaver.sqlPresentation.exsd"/>
@@ -218,6 +217,7 @@
     <extension point="org.eclipse.ui.commands">
         <category id="org.jkiss.dbeaver.core.sql" name="%category.sqleditor.name" description="%category.sqleditor.description"/>
 
+        <command id="org.jkiss.dbeaver.ui.controls.folders.CycleTabsHandler" name="Cycle Through Tabs" description="Cycles through editor tabs in last-viewed order"/>
         <command id="org.jkiss.dbeaver.core.sql.editor.open" name="%command.org.jkiss.dbeaver.core.sql.editor.open.name" description="%command.org.jkiss.dbeaver.core.sql.editor.open.description" categoryId="org.jkiss.dbeaver.core.database"/>
         <command id="org.jkiss.dbeaver.core.sql.editor.recent" name="%command.org.jkiss.dbeaver.core.sql.editor.recent.name" description="%command.org.jkiss.dbeaver.core.sql.editor.recent.description" categoryId="org.jkiss.dbeaver.core.database"/>
         <command id="org.jkiss.dbeaver.core.sql.editor.create" name="%command.org.jkiss.dbeaver.core.sql.editor.create.name" description="%command.org.jkiss.dbeaver.core.sql.editor.create.description" categoryId="org.jkiss.dbeaver.core.database"/>
@@ -326,7 +326,10 @@
     <extension point="org.eclipse.ui.handlers">
 
         <!-- SQL editor handlers -->
-
+        <handler
+                commandId="org.jkiss.dbeaver.ui.controls.folders.CycleTabsHandler"
+                class="org.jkiss.dbeaver.ui.controls.folders.CycleTabsHandler">
+        </handler>
         <handler commandId="org.jkiss.dbeaver.core.sql.editor.open" class="org.jkiss.dbeaver.ui.editors.sql.handlers.SQLEditorHandlerOpenEditor">
             <activeWhen>
                 <or>
@@ -768,6 +771,7 @@
         <key commandId="org.jkiss.dbeaver.core.sql.editor.console" contextId="org.jkiss.dbeaver.ui.context.navigator" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="CTRL+ALT+Enter"/>
         <key commandId="org.jkiss.dbeaver.ui.editors.sql.sync.connection" contextId="org.jkiss.dbeaver.ui.context.navigator" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="CTRL+SHIFT+."/>
 
+        <key commandId="org.jkiss.dbeaver.ui.controls.folders.CycleTabsHandler" contextId="org.eclipse.ui.contexts.window" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="CTRL+TAB"/>
         <key commandId="org.jkiss.dbeaver.ui.editors.sql.run.statement" contextId="org.jkiss.dbeaver.ui.editors.sql.script.focused" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" platform="win32" sequence="CTRL+Enter"/>
         <key commandId="org.jkiss.dbeaver.ui.editors.sql.run.statement" contextId="org.jkiss.dbeaver.ui.editors.sql.script.focused" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" platform="gtk" sequence="CTRL+Enter"/>
         <key commandId="org.jkiss.dbeaver.ui.editors.sql.run.statement" contextId="org.jkiss.dbeaver.ui.editors.sql.script.focused" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" platform="cocoa" sequence="COMMAND+Enter"/>

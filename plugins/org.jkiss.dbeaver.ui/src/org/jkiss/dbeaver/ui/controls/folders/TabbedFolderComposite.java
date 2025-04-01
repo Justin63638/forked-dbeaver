@@ -38,6 +38,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import java.util.Deque;
+import java.util.LinkedList;
 
 
 
@@ -54,6 +57,8 @@ public class TabbedFolderComposite extends Composite implements ITabbedFolderCon
     @Nullable
     private TabbedFolderInfo[] folders;
 
+    private Deque<String> folderHistory = new LinkedList<>();
+
     private final Map<TabbedFolderInfo, Composite> contentsMap = new HashMap<>();
     private List<ITabbedFolderListener> listeners = new ArrayList<>();
     private FolderPane[] folderPanes;
@@ -61,6 +66,17 @@ public class TabbedFolderComposite extends Composite implements ITabbedFolderCon
 
     private TabbedFolderState folderState;
     private boolean inLayoutUpdate;
+
+    public void cycleTabs() {
+        if (folderHistory.size() < 2) {
+            return;
+        }
+
+        folderHistory.pop();
+        switchFolder(folderHistory.peek(), true);
+        folderHistory.pop();
+
+    }
 
     private class FolderPane {
         TabbedFolderInfo[] folders;
@@ -144,6 +160,10 @@ public class TabbedFolderComposite extends Composite implements ITabbedFolderCon
         }
 
         private void onFolderSwitch(TabbedFolderInfo folder) {
+            folderHistory.push(folder.getId());
+            if (folderHistory.size() > 10) {
+                folderHistory.removeLast();
+            }
             Composite newContent = contentsMap.get(folder);
             ITabbedFolder newFolder = folder.getContents();
             if (newContent == null) {
