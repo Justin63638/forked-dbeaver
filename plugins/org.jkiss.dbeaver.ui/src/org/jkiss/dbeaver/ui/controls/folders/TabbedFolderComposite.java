@@ -66,17 +66,6 @@ public class TabbedFolderComposite extends Composite implements ITabbedFolderCon
     private TabbedFolderState folderState;
     private boolean inLayoutUpdate;
 
-    public void cycleTabs() {
-        if (folderHistory.size() < 2) {
-            return;
-        }
-
-        folderHistory.pop();
-        switchFolder(folderHistory.peek(), true);
-        folderHistory.pop();
-
-    }
-
     private class FolderPane {
         TabbedFolderInfo[] folders;
         TabbedFolderList folderList;
@@ -211,6 +200,17 @@ public class TabbedFolderComposite extends Composite implements ITabbedFolderCon
                 listener.folderSelected(folder.getId());
             }
         }
+
+    }
+
+    public void cycleTabs() {
+        if (folderHistory.size() < 2) {
+            return;
+        }
+
+        folderHistory.pop();
+        switchFolder(folderHistory.peek(), true);
+        folderHistory.pop();
 
     }
 

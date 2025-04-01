@@ -4,10 +4,8 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Control;
 public class CycleTabsHandler extends AbstractHandler {
 
     @Override
